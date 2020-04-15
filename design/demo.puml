@@ -5,8 +5,8 @@ package paper <<Aggregate>> {
         id: String
         teacherId: String
         blankQuizIds: List<String>
-        update()
-        {static} create(): Paper
+        reassemble()
+        {static} assemble(): Paper
     }
 }
 
@@ -14,14 +14,14 @@ package examination <<Aggregate>>  {
 
     class Examination <<Aggregate Root>> {
         id: String
-        paper: Paper
+        startDate: DateTime
+        endDate: DateTime
         {static} create(): Examination
     }
 
     class "Paper" as p <<Value Object>>{
         id: String
         teacherId: String
-        detail: String
     }
 
     class "BlankQuiz" as b <<Value Object>> {
@@ -32,17 +32,25 @@ package examination <<Aggregate>>  {
     }
 
     Examination "1" *-- "1" p
-    p "1" *-- "1...n" b
+    p "1" *-- "5...20" b
 }
 
 package answerSheet <<Aggregate>> {
     class AnswerSheet <<Aggregate Root>> {
         id: String
         studentId: String
+        examinationId: String
         handIn()
         review()
-        {static} create(): AnswerSheet
+        {static} assign(): AnswerSheet
     }
+
+    class "Answer" <<Entity>> {
+        id: String
+        content: String
+        submit()
+    }
+    AnswerSheet "1" *-- "5...20" Answer
 }
 
 @enduml
