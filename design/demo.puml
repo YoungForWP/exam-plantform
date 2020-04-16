@@ -14,8 +14,8 @@ package examination <<Aggregate>>  {
 
     class Examination <<Aggregate Root>> {
         id: String
-        startDate: DateTime
-        endDate: DateTime
+        startDate: LocalDateTime
+        endDate: LocalDateTime
         {static} create(): Examination
     }
 
@@ -40,6 +40,7 @@ package answerSheet <<Aggregate>> {
         id: String
         studentId: String
         examinationId: String
+        submit()
         handIn()
         review()
         {static} assign(): AnswerSheet
@@ -48,7 +49,6 @@ package answerSheet <<Aggregate>> {
     class "Answer" <<Entity>> {
         id: String
         content: String
-        submit()
     }
     AnswerSheet "1" *-- "5...20" Answer
 }
