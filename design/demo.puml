@@ -4,7 +4,7 @@ package paper <<Aggregate>> {
     class Paper <<Aggregate Root>> {
         id: String
         teacherId: String
-        blankQuizIds: List<String>
+        blankQuizIds: Set<String>
         reassemble()
         {static} assemble(): Paper
     }
